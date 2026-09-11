@@ -1,0 +1,38 @@
+{
+  "cardCollection": [
+    {
+      "comment": "its pretty neat",
+      "print": "true",
+      "artSize": "false",
+      "cardCondition": "Lightly Played",
+      "cardId": "result2",
+      "name": "Chandra's Ignition",
+      "imgurl": "https://cards.scryfall.io/normal/front/9/2/9243b872-c90f-4d25-9d8c-dbbcc8004a48.jpg?1783911491",
+      "backimgurl": "https://cards.scryfall.io/normal/front/9/2/9243b872-c90f-4d25-9d8c-dbbcc8004a48.jpg?1783911491",
+      "set": "Secret Lair Drop",
+      "artist": "Justyna Dura",
+      "flavorText": "Sakura Miku's singing strikes like lightning in the spring.",
+      "oracleText": "Target creature you control deals damage equal to its power to each other creature and each opponent.",
+      "typeLine": "Sorcery",
+      "flavorName": "Miku's Spark",
+      "id": 1
+    },
+    {
+      "comment": "",
+      "print": "true",
+      "artSize": "false",
+      "cardCondition": "Moderately Played",
+      "cardId": "result0",
+      "name": "A-Lantern Bearer // A-Lanterns' Lift",
+      "imgurl": "https://cards.scryfall.io/normal/front/9/4/942d9122-f380-4bc0-8bf1-2ba6f49fd3ee.jpg?1783918314",
+      "backimgurl": "https://cards.scryfall.io/normal/back/9/4/942d9122-f380-4bc0-8bf1-2ba6f49fd3ee.jpg?1783918314",
+      "set": "Innistrad: Crimson Vow",
+      "artist": "Zoltan Boros",
+      "flavorText": "",
+      "oracleText": "Flying, Disturb {1}{U} (You may cast this card from your graveyard transformed for its disturb cost.), // Enchant creature, Enchanted creature gets +1/+1 and has flying. If Lanterns' Lift would be put into a graveyard from anywhere, exile it instead.",
+      "typeLine": "Creature — Spirit // Enchantment — Aura",
+      "flavorName": "",
+      "id": 2
+    }
+  ]
+}

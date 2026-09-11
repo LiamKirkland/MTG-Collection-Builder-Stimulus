@@ -1,0 +1,424 @@
+@font-face {
+  font-family: "MTGFont";
+  src: url("magicFont.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --parchment: #f4ead5;
+  --parchment-dark: #e8dcbe;
+  --frame-brown: #2b1d10;
+  --frame-mid: #574231;
+  --ink: #1a1208;
+  --gold: #c9a44c;
+  --gold-bright: #e5c25a;
+  --mana-red: #9b2226;
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem;
+  background:
+    radial-gradient(ellipse at top, #fbf3df 0%, var(--parchment) 60%, #ddc9a3 100%);
+  color: var(--ink);
+  font-family: "Georgia", "Times New Roman", serif;
+  min-height: 100vh;
+}
+
+h1 {
+  margin: 0 0 1rem 0;
+  font-family: "MTGFont", "Georgia", serif;
+  font-size: 3rem;
+  letter-spacing: 0.04em;
+  color: var(--frame-brown);
+  text-shadow:
+    1px 1px 0 var(--gold),
+    2px 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+#searchForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+#searchForm input[type="text"] {
+  flex: 1 1 280px;
+  padding: 0.5rem 0.7rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: var(--parchment);
+  border: 1px solid var(--frame-mid);
+  border-radius: 4px;
+  color: var(--ink);
+}
+
+#searchForm input[type="text"]:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+#searchForm input[type="submit"],
+#searchForm input[type="button"],
+#addForm input[type="submit"],
+#updateForm input[type="submit"],
+#updateForm input[type="button"],
+.flip-btn {
+  padding: 0.45rem 1rem;
+  font-size: 0.95rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--parchment);
+  background: linear-gradient(180deg, var(--frame-mid), var(--frame-brown));
+  border: 1px solid var(--frame-brown);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), var(--shadow);
+  transition: transform 0.05s ease, background 0.15s ease, color 0.15s ease;
+}
+
+#searchForm input[type="submit"]:hover,
+#searchForm input[type="button"]:hover,
+#addForm input[type="submit"]:hover,
+#updateForm input[type="submit"]:hover,
+#updateForm input[type="button"]:hover,
+.flip-btn:hover {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: var(--frame-brown);
+}
+
+#searchForm input[type="submit"]:active,
+#searchForm input[type="button"]:active,
+.flip-btn:active {
+  transform: translateY(1px);
+}
+
+#deleteBtn {
+  background: linear-gradient(180deg, #b73237, var(--mana-red)) !important;
+  border-color: #5a1316 !important;
+}
+
+#deleteBtn:hover {
+  background: linear-gradient(180deg, #d44a4f, #a92327) !important;
+  color: var(--parchment) !important;
+}
+
+#search-container {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+#search-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--parchment-dark);
+  border: 1px solid var(--frame-mid);
+  border-radius: 6px;
+  box-shadow: var(--shadow);
+}
+
+#search-results:empty {
+  border: none;
+}
+
+#search-results li {
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid rgba(87, 66, 49, 0.25);
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+
+#search-results li:hover {
+  background: var(--gold);
+  color: var(--frame-brown);
+}
+
+#search-results li:last-child {
+  border-bottom: none;
+}
+
+.card-info-container {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  padding: 1.1rem;
+  background: var(--parchment);
+  border: 2px solid var(--frame-brown);
+  border-radius: 10px;
+  box-shadow:
+    inset 0 0 0 1px var(--gold),
+    var(--shadow);
+}
+
+.card-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  width: 240px;
+  max-width: 100%;
+}
+
+.card-img-wrapper {
+  position: relative;
+  width: 100%;
+  display: block;
+}
+
+#collection-foil-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  pointer-events: none;
+  object-fit: none;
+  object-position: 20% 20%;
+  opacity: 0.3;
+  transform: translateZ(1px); 
+  will-change: object-position, opacity;
+}
+
+.card-img {
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+}
+
+.flip-btn {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-text-container {
+  flex: 1;
+  min-width: 0;
+}
+
+.card-name {
+  margin: 0 0 0.85rem 0;
+  font-family: "MTGFont", "Georgia", serif;
+  font-size: 1.7rem;
+  color: var(--frame-brown);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.35rem;
+  letter-spacing: 0.02em;
+}
+
+.card-text-container>div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.35rem 0;
+}
+
+.card-info-container h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--mana-red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-info-container p {
+  margin: 0;
+  line-height: 1.45;
+  flex: 1;
+  min-width: 0;
+  word-wrap: break-word;
+  color: var(--ink);
+}
+
+
+#addForm {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 0.75rem 20px;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--frame-mid);
+  align-items: start;
+}
+
+#addForm textarea,
+#updateForm textarea {
+  width: 100%;
+  height: 4rem;
+  font-family: inherit;
+  background: var(--parchment-dark);
+  border: 1px solid var(--frame-mid);
+  border-radius: 4px;
+  padding: 0.4rem;
+  color: var(--ink);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+#addForm input[type="submit"] {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+#addForm textarea:focus,
+#updateForm textarea:focus,
+select:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+}
+
+select {
+  font-family: inherit;
+  background: var(--parchment);
+  border: 1px solid var(--frame-mid);
+  border-radius: 4px;
+  padding: 0.25rem 0.4rem;
+  color: var(--ink);
+}
+
+.addFormOptions,
+#addFormOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: stretch;
+}
+
+#addFormOptions>div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#addFormOptions label {
+  font-weight: 700;
+  color: var(--frame-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.85rem;
+}
+
+#addFormOptions input[type="checkbox"] {
+  justify-self: start;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--mana-red);
+  cursor: pointer;
+  margin: 0;
+}
+
+#addFormOptions #conSelector,
+#updateForm #updateCond {
+  width: max-content;
+  justify-self: start;
+  background: var(--parchment-dark);
+  color: var(--ink);
+  border-color: var(--frame-mid);
+}
+
+#addFormOptions #conSelector:hover,
+#updateForm #updateCond:hover {
+  background: #dcceac;
+}
+
+#addFormOptions #conSelector option,
+#updateForm #updateCond option {
+  background: var(--parchment);
+  color: var(--ink);
+}
+
+
+#collection-container {
+  display: grid;
+  grid-template-columns: 1fr 1.75fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+#card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  padding: 0.75rem;
+  background: var(--parchment-dark);
+  border: 2px dashed var(--frame-mid);
+  border-radius: 8px;
+  min-height: 160px;
+}
+
+#card-list img {
+  width: 110px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+  margin-bottom: 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.12s ease, outline-color 0.12s ease;
+  outline: 2px solid transparent;
+}
+
+#card-list img:hover {
+  outline-color: var(--gold-bright);
+  transform: translateY(-2px);
+}
+
+#updateForm>div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.35rem 0;
+}
+
+#updateForm input[type="submit"],
+#updateForm input[type="button"] {
+  margin-top: 0.5rem;
+  margin-right: 0.4rem;
+}
+
+@media (max-width: 1050px) {
+  #search-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card-info-container {
+    flex-direction: column;
+  }
+
+  .card-img-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .card-img {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}

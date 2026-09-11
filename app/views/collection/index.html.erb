@@ -1,0 +1,131 @@
+<h1>SparkBinder</h1>
+<form id="searchForm">
+  <input type="text" name="query" minlength="3" placeholder="Search for a card..." autocomplete="off" class="textInput" required />
+  <input type="submit" name="submit" value="Search" />
+  <input type="button" name="randSearch" value="Random" id="randSearch" />
+</form>
+<div id="search-container">
+  <ul id="search-results"></ul>
+  <div class="card-info-container" id="search-info-container">
+    <div class="card-img-container">
+      <div class="card-img-container" data-controller="flip">
+        <%= image_tag "placeholder.jpg", class: "card-img", id: "search-card-img", data: { controller: "card-tilt", flip_target: "image" } %>
+        <button id="search-flip-btn" class="flip-btn" data-action="click->flip#toggle" hidden>Flip Card</button>
+      </div>
+    </div>
+    <div class="card-text-container">
+      <h2 class="card-name" id="search-card-name">Search for a card!</h2>
+      <div>
+        <h4 class="card-type-label">Type: </h4>
+        <p class="card-type-p" id="search-card-type">Card — Placeholder</p>
+      </div>
+      <div>
+        <h4 class="card-artist-label">Artist: </h4>
+        <p class="card-artist-p" id="search-card-artist">Xiaojie Cat</p>
+      </div>
+      <div>
+        <h4 class="card-set-label">Set: </h4>
+        <p class="card-set-p" id="search-card-set">None.</p>
+      </div>
+      <div>
+        <h4 class="card-desc-label">Description: </h4>
+        <p class="card-desc-p" id="search-card-desc">None.</p>
+      </div>
+      <div>
+        <h4 class="card-flavor-label">Flavor Text: </h4>
+        <p class="card-flavor-p" id="search-card-flavor">This card is very powerful, as you can tell from the image...
+        </p>
+      </div>
+      <form id="addForm">
+        <textarea placeholder="Add a comment..." name="comment" autocomplete="off" class="textInput"></textarea>
+        <div id="addFormOptions">
+          <div>
+            <label>Foil</label>
+            <input type="checkbox" name="foil" id="foil">
+          </div>
+          <div>
+            <label>Full Art</label>
+            <input type="checkbox" name="art" id="art">
+          </div>
+          <div>
+            <label>Condition</label>
+            <select name="condition" id="conSelector" required>
+              <option value="">Select a Condition</option>
+              <option value="Near Mint">Near Mint</option>
+              <option value="Lightly Played">Lightly Played</option>
+              <option value="Moderately Played">Moderately Played</option>
+              <option value="Heavily Played">Heavily Played</option>
+              <option value="Damaged">Damaged</option>
+            </select>
+          </div>
+        </div>
+        <input type="submit" value="Add Card">
+      </form>
+    </div>
+  </div>
+</div>
+<div id="collection-container">
+  <div id="card-list"></div>
+  <div class="card-info-container" id="collection-info-container">
+    <div class="card-img-container" data-controller="flip">
+      <div class="card-img-wrapper" id="collection-img-wrapper" data-controller="card-tilt">
+        <img class="card-img" id="collection-card-img" data-flip-target="image" />
+        <%= image_tag "foilOverlay.png", id: "collection-foil-overlay", data: { card_tilt_target: "foil" } %>
+      </div>
+      <button id="collection-flip-btn" class="flip-btn" data-action="click->flip#toggle" hidden>Flip Card</button>
+    </div>
+    <div class="card-text-container" id="collection-text-info">
+      <h2 class="card-name" id="collection-card-name"></h2>
+      <div>
+        <h4 class="card-type-label">Type: </h4>
+        <p class="card-type-p" id="collection-card-type"></p>
+      </div>
+      <div>
+        <h4 class="card-artist-label">Artist: </h4>
+        <p class="card-artist-p" id="collection-card-artist"></p>
+      </div>
+      <div>
+        <h4 class="card-set-label">Set: </h4>
+        <p class="card-set-p" id="collection-card-set"></p>
+      </div>
+      <div>
+        <h4 class="card-desc-label">Description: </h4>
+        <p class="card-desc-p" id="collection-card-desc"></p>
+      </div>
+      <div>
+        <h4 class="card-flavor-label">Flavor Text: </h4>
+        <p class="card-flavor-p" id="collection-card-flavor">
+        </p>
+      </div>
+      <form id="updateForm">
+        <div>
+          <h4>Condition: </h4>
+          <p id="collection-condition"></p>
+          <select name="condition" id="updateCond" hidden>
+            <option value="Near Mint">Near Mint</option>
+            <option value="Lightly Played">Lightly Played</option>
+            <option value="Moderately Played">Moderately Played</option>
+            <option value="Heavily Played">Heavily Played</option>
+            <option value="Damaged">Damaged</option>
+          </select>
+        </div>
+        <div>
+          <h4>Foil: </h4>
+          <p id="collection-foil"></p>
+          <input type="checkbox" name="foil" id="updateFoil" hidden>
+        </div>
+        <div>
+          <h4>Full Art: </h4>
+          <p id="collection-art"></p>
+          <input type="checkbox" name="art" id="updateArt" hidden>
+        </div>
+        <div>
+          <h4>Comment: </h4>
+          <p id="collection-comment"></p>
+          <textarea placeholder="Add a comment..." name="comment" autocomplete="off" class="textInput" hidden></textarea>
+        </div>
+        <input type="submit" value="Update" id="updateBtn">
+        <input type="button" name="delete" value="Delete" id="deleteBtn">
+      </form>
+    </div>
+  </div>
